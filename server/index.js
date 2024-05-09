@@ -1,9 +1,6 @@
-// index.js
-
 const express = require('express');
 const cors = require('cors');
 const { db } = require('./db/db');
-const { readdirSync } = require('fs');
 const app = express();
 require('dotenv').config();
 
@@ -13,19 +10,6 @@ app.use(cors({
     origin: 'https://budget-records-2.onrender.com'
 }));
 app.use(express.json());
-
-// Dynamic route setup
-const routesPath = './routes';
-
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Server is running' });
-})
-readdirSync(routesPath).forEach((file) => {
-    if (file.endsWith('.js')) {
-        const route = require(`${routesPath}/${file}`);
-        app.use('/api/v1', route);
-    }
-});
 
 // MongoDB connection
 const server = async () => {
@@ -40,3 +24,18 @@ const server = async () => {
 };
 
 server();
+
+// Importing routes
+const incomeRoutes = require('./routes/income');
+const expenseRoutes = require('./routes/expense');
+
+// Route setup
+app.use('/api/v1', incomeRoutes);
+app.use('/api/v1', expenseRoutes);
+
+// Default route
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Server is running' });
+});
+
+module.exports = app;
