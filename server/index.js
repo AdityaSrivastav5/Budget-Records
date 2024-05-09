@@ -16,6 +16,10 @@ app.use(express.json());
 
 // Dynamic route setup
 const routesPath = './routes';
+
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Server is running' });
+})
 readdirSync(routesPath).forEach((file) => {
     if (file.endsWith('.js')) {
         const route = require(`${routesPath}/${file}`);
