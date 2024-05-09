@@ -9,7 +9,9 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3004;
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://budget-records-2.onrender.com/'
+}));
 app.use(express.json());
 
 // Dynamic route setup
