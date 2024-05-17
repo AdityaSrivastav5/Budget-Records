@@ -4,6 +4,15 @@ import { signout } from '../../utils/Icons'
 import { menuItems } from '../../utils/menuItems'
 
 function Navigation({active, setActive}) {
+    const {
+    totalExpenses,
+    incomes,
+    expenses,
+    totalIncome,
+    totalBalance,
+    getIncomes,
+    getExpenses,
+  } = useGlobalContext();
     
     return (
         <NavStyled>
