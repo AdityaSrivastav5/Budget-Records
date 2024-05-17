@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/Icons'
 import { menuItems } from '../../utils/menuItems'
+import { useGlobalContext } from "../../context/globalContext";
 
 function Navigation({active, setActive}) {
     const {
